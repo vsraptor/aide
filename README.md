@@ -262,6 +262,7 @@ Use {body} to specify where you want to insert your question.
 	Adding new prompt : task
 	aide: !prompt list
 	{'task': {'prompt': 'You have the following objective "{body}". Create a list of step by step actions to accomplish the goal.'}}
+ 
 	aide: > task How can I sum two numbers ?
 	Q: You have the following objective "How can I sum two numbers ?". Create a list of step by step actions to accomplish the goal.
 	
