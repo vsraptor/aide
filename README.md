@@ -62,9 +62,9 @@ https://toml.io/en/
 
 ### Installation
 
-	git clone ...
+	git clone git@github.com:vsraptor/aide.git
 	cd aide
-	pip install -r requirment.txt
+	pip install -r requirments.txt
 
 ### Running
 
