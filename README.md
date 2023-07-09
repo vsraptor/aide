@@ -173,24 +173,7 @@ Check the available commands with !help
 	Using embedded DuckDB with persistence: data will be stored in: .//profiles/main/dbs/main
 	{'model_path': './models/TheBloke_WizardLM-7B-GGML/wizardLM-7B.ggmlv3.q4_1.bin', 'n_ctx': 1000, 'n_batch': 16, 'n_gpu_layers': 20, 'max_tokens': 512}
 	llama.cpp: loading model from ./models/TheBloke_WizardLM-7B-GGML/wizardLM-7B.ggmlv3.q4_1.bin
-	llama_model_load_internal: format     = ggjt v3 (latest)
-	llama_model_load_internal: n_vocab    = 32001
-	llama_model_load_internal: n_ctx      = 1000
-	llama_model_load_internal: n_embd     = 4096
-	llama_model_load_internal: n_mult     = 256
-	llama_model_load_internal: n_head     = 32
-	llama_model_load_internal: n_layer    = 32
-	llama_model_load_internal: n_rot      = 128
-	llama_model_load_internal: ftype      = 3 (mostly Q4_1)
-	llama_model_load_internal: n_ff       = 11008
-	llama_model_load_internal: n_parts    = 1
-	llama_model_load_internal: model size = 7B
-	llama_model_load_internal: ggml ctx size =    0.07 MB
-	llama_model_load_internal: mem required  = 5809.34 MB (+ 1026.00 MB per state)
-	...................................................................................................
-	llama_init_from_file: kv self size  =  500.00 MB
-	AVX = 1 | AVX2 = 1 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | FMA = 1 | NEON = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 1 | VSX = 0 | 
-	
+	................	
 	
 	aide: who are the spartans ?
 	Llama.generate: prefix-match hit
@@ -237,6 +220,8 @@ Check the available commands with !help
 	Model: main
 	DB: main
 	................
+
+ 	# switch to qa mode
 	aide: !mode qa
 	aide: what is law ?
 	 Law refers to the set of rules and regulations established by the government and enforced by the legal system to govern the behavior of citizens and maintain order in society.
@@ -244,7 +229,8 @@ Check the available commands with !help
 	The penal statutes form a very small proportion of the sixty-two books of the Code and Pandects; and in all judicial proceedings, the life or death of a citizen is determined with less caution or delay than the most ordinary question of covenant or inheritance. This singular distinction, though something may be allowed for the urgent necessity of defending the peace of society, is derived from the nature of criminal and civil jurisprudence. Our duties to the state are simple and uniform: the
 	aide: !source 1
 	./profiles/main/src/main/hist-rome.txt
-	
+
+ 	#switch the db to test
 	aide: !switch db test
 	Switching to DB : test
 	Using embedded DuckDB with persistence: data will be stored in: .//profiles/main/dbs/test
@@ -260,7 +246,7 @@ Check the available commands with !help
 	aide: !source 1
 	./profiles/main/src/test/bastiat-the-law.txt
 	
-	
+	#ask in direct mode ... ? toggles the mode
 	aide: ?what is law ?
 	
 	Law is a set of rules and regulations that are established by the government or other authoritative bodies to govern the behavior of individuals and organizations within a particular society. These laws are designed to promote order, justice, and fairness in society, and to protect citizens from harm. Law can be written or unwritten, and can cover a wide range of topics such as contract law, criminal law, tort law, property law, and environmental law
@@ -268,9 +254,9 @@ Check the available commands with !help
 
 #### Using System prompt
 
-For now very rudimentary ... probably will extend the functionality.
+For now very rudimentary ... probably will extend this functionality.
 
-Use {body} to specify where to insert your question.
+Use {body} to specify where you want to insert your question.
 
 	aide: !prompt new task You have the following objective "{body}". Create a list of step by step actions to accomplish the goal.
 	Adding new prompt : task
