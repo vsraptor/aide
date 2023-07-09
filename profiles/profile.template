@@ -1,0 +1,48 @@
+name='main'
+
+
+	[dbs.main]
+		path="dbs/main"
+		[dbs.main.client_settings]
+			chroma_db_impl='duckdb+parquet'
+			anonymized_telemetry=false
+
+	[dbs.test]
+		path="dbs/test"
+		[dbs.test.client_settings]
+			chroma_db_impl='duckdb+parquet'
+			anonymized_telemetry=false
+
+
+
+	[models.main]
+		type='LlamaCpp'
+		target_source_chunks=4
+		embeddings_model='all-MiniLM-L6-v2'
+		
+		model_path='./models/TheBloke_WizardLM-7B-GGML/wizardLM-7B.ggmlv3.q4_1.bin'
+		n_ctx=1000
+		n_batch=16
+		n_gpu_layers=20
+		max_tokens=512
+	[models.O7B]
+		type='LlamaCpp'
+		target_source_chunks=4
+		embeddings_model='all-MiniLM-L6-v2'
+		model_path='./models/TheBloke_orca_mini_7B-GGML/orca-mini-7b.ggmlv3.q4_1.bin'
+		n_ctx=1000
+		n_batch=8
+		n_gpu_layers=20
+	[models.W13B]
+		type='LlamaCpp'
+		target_source_chunks=4
+		embeddings_model='all-MiniLM-L6-v2'
+		model_path='./models/TheBloke_WizardLM-13B-Uncensored-GGML/wizardLM-13B-Uncensored.ggmlv3.q4_1.bin'
+		n_ctx=1000
+		n_batch=8
+		n_gpu_layers=20
+
+	[ingest.main]
+		path='src/main'
+	[ingest.test]
+		path='src/test'
