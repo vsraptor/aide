@@ -68,10 +68,12 @@ https://toml.io/en/
 
 ### Running
 
-1. Download a model in the ./models directory. (make a subdir)
+0. Creaate 'models' directory or symlink to the directory where you host your LLM's
+1. Download a model in the ./models directory. (make a subdir for the specific model)
+   
 	F.e. from here : https://huggingface.co/TheBloke/WizardLM-7B-GGML/tree/main
 
-2. Configure the model in profiles/main/profile.toml
+3. Configure the model in profiles/main/profile.toml
 
 	Example (you can use any argument supported by Langchain LlamaCpp : https://github.com/mmagnesium/langchain/blob/master/langchain/llms/llamacpp.py):
 
@@ -88,13 +90,13 @@ https://toml.io/en/
 			max_tokens=512
 
 
-3. Then copy the source docs (.txt, .pdf ...) to the corresponding 'src'-sub-directory (look above dir structure)
+4. Then copy the source docs (.txt, .pdf ...) to the corresponding 'src'-sub-directory (look above dir structure)
 
-4. Next ingest them. This will create/update the relevant vector-db under 'dbs' dir
+5. Next ingest them. This will create/update the relevant vector-db under 'dbs' dir
 
 		python3 ingest_docs.py --profile main --db main
 
-5. Run the shell
+6. Run the shell
 
 		python3 run_aide.py --profile main --db main
 
