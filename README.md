@@ -1,7 +1,7 @@
 ## What is this ?
 
 This in general is a Shell around Large Language Model (LLM), at least for now.
-It is based on privateGPT code, which I refactored, componetized and enchanced with additional features.
+It is based on [privateGPT](https://github.com/imartinez/privateGPT) code, which I refactored, componetized and enchanced with additional features.
 
 In short this tool allows you to interact with different document-sets OR simply query a LLM.
 
