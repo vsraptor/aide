@@ -37,8 +37,9 @@ Here are some I used from huggingface :
 ### Profiles
 
 The idea of profiles is to keep multiple configurations and be able to switch between them.
-Every profile can have many document stores. This allows you to separate them thematicaly f.e. one docs store for economics another for history ...etc
-For now you have to create manually the directory structure and configuration if you want other profile than 'main'.
+Every profile can have many document stores. This allows you to separate them thematicaly f.e. one docs store for **economics** another for **history** ...etc
+
+For now you have to create manually the directory structure and configuration if you want to use other profile than 'main'.
 
 Here is the directory structure for the 'main' profile:
 
