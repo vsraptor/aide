@@ -57,7 +57,7 @@ Here is the directory structure for the 'main' profile:
 
 	profiles/main/profile.toml
 
-The cfg is using .toml format.
+The cfg is using **.toml** format.
 https://toml.io/en/
 
 ### Installation
@@ -73,7 +73,7 @@ https://toml.io/en/
    
 	F.e. from here : https://huggingface.co/TheBloke/WizardLM-7B-GGML/tree/main
 
-3. Configure the model in profiles/main/profile.toml
+3. Configure the model in **profiles/main/profile.toml**
 
 	Example (you can use any argument supported by Langchain LlamaCpp : https://github.com/mmagnesium/langchain/blob/master/langchain/llms/llamacpp.py):
 
