@@ -68,7 +68,7 @@ https://toml.io/en/
 
 ### Running
 
-0. Creaate 'models' directory or symlink to the directory where you host your LLM's
+0. Create 'models' directory or symlink to the directory where you host your LLM's
 1. Download a model in the ./models directory. (make a subdir for the specific model)
    
 	F.e. from here : https://huggingface.co/TheBloke/WizardLM-7B-GGML/tree/main
@@ -76,7 +76,6 @@ https://toml.io/en/
 3. Configure the model in **profiles/main/profile.toml**
 
 	Example (you can use any argument supported by Langchain LlamaCpp : https://github.com/mmagnesium/langchain/blob/master/langchain/llms/llamacpp.py):
-
 
 		........
 		[models.main]
@@ -130,7 +129,7 @@ https://toml.io/en/
 	                        Select model. Default: main
 	  --db DB, -d DB        Select db. Default: main
 
-
+-----
 
 ### Interact
 
@@ -163,7 +162,7 @@ Check the available commands with !help
 		save <file-name> - save the prompts to a file
 		load <file-name> - load the prompts from a file	
 				
-
+-----
 
 #### Example of a simple chat
 
