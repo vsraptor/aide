@@ -89,6 +89,15 @@ class Ingest:
 		self.profiles.load_profile(profile)
 		self.p = self.profiles.profile_alias(profile)
 		self.model = self.p.model_alias(model)
+		self.db = self.p.db_alias(db)
+
+		self.chunk_size = chunk_size
+		if 'chunk_size' in self.db :
+			self.chunk_size = self.db['chunk_size']
+
+		self.chunk_overlap = chunk_overlap
+		if 'chunk_overlap' in self.db :
+			self.chunk_overlap = self.db['chunk_overlap']
 
 		# print(self.p)
 		print(f'Profile: {profile}')
@@ -165,7 +174,7 @@ class Ingest:
 			print("No new documents to load")
 			exit(0)
 		print(f"Loaded {len(documents)} new documents from {ingest_path}")
-		text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+		text_splitter = RecursiveCharacterTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap)
 		texts = text_splitter.split_documents(documents)
 		print(f"Split into {len(texts)} chunks of text (max. {chunk_size} tokens each)")
 		return texts

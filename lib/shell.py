@@ -42,6 +42,7 @@ class Shell:
 	def parse_arguments(self):
 		parser = argparse.ArgumentParser(description='AIDE: Ask questions to your documents without an internet connection, using the power of LLMs.')
 		parser.add_argument("--mute-stream", "-M", action='store_true', help='Use this flag to disable the streaming StdOut callback for LLMs.')
+		parser.add_argument("--multiline", "-l", default=False, type=bool, help='Use multiline mode. Alt-Enter commits the question. Default: false')
 		parser.add_argument("--profile", "-p", default='main', help='Select profile. Default: main')
 		parser.add_argument("--model", "-m", default='main', help='Select model.  Default: main')
 		parser.add_argument("--db", "-d", default='main', help='Select db.  Default: main')
@@ -154,7 +155,7 @@ quit - exit the session
 	def quit(self): pass
 	
 	def bottom_toolbar(self):
-		return HTML(f'profile: <b><style bg="ansired">{self.aide.profile_name}</style></b> | model: <b>{self.aide.model_name}</b> | db: <b>{self.aide.db_name}</b> | mode: <b>{self.mode}</b>')
+		return HTML(f'profile: <b><style bg="ansired">{self.aide.profile_name}</style></b> | model: <b>{self.aide.model_name}</b> | db: <b>{self.aide.db_name}</b> | mode: <b>{self.mode}</b>| multi: <b>{self.args.multiline}</b>')
 
 
 	def step(self, text):
@@ -174,7 +175,7 @@ quit - exit the session
 		
 		while True:
 		
-			text = self.session.prompt("aide: ", auto_suggest=AutoSuggestFromHistory(), bottom_toolbar=self.bottom_toolbar)
+			text = self.session.prompt("aide: ", auto_suggest=AutoSuggestFromHistory(), bottom_toolbar=self.bottom_toolbar, multiline=self.args.multiline)
 
 			if text == 'quit' :
 				self.quit()
