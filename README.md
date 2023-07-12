@@ -15,7 +15,8 @@ In short this tool allows you to interact with different document-sets OR simply
 	4. Better CLI interface
 	5. Direct and QA query modes.
 	6. Keeps .history of the commands
-	6. Keeps .chat_history
+	7. Keeps .chat_history
+ 	8. Multiline support (use Alt+Enter to commit a question)
 
 
 
@@ -115,15 +116,17 @@ https://toml.io/en/
 	  --db DB, -d DB        Select db.
 
 
-
+	
 	$ python3 run_aide.py --help
-	usage: run_aide.py [-h] [--mute-stream] [--profile PROFILE] [--model MODEL] [--db DB]
+	usage: run_aide.py [-h] [--mute-stream] [--multiline MULTILINE] [--profile PROFILE] [--model MODEL] [--db DB]
 	
 	AIDE: Ask questions to your documents without an internet connection, using the power of LLMs.
 	
 	options:
 	  -h, --help            show this help message and exit
 	  --mute-stream, -M     Use this flag to disable the streaming StdOut callback for LLMs.
+	  --multiline MULTILINE, -l MULTILINE
+	                        Use multiline mode. Alt-Enter commits the question. Default: false
 	  --profile PROFILE, -p PROFILE
 	                        Select profile. Default: main
 	  --model MODEL, -m MODEL
