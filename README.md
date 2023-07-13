@@ -5,6 +5,8 @@ It is based on [privateGPT](https://github.com/imartinez/privateGPT) code, which
 
 In short this tool allows you to interact with different document-sets OR simply query a LLM.
 
+**Everything runs locally.**
+
 ### Features
 
 	1. Profile support
