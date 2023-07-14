@@ -41,11 +41,13 @@ Here are some I used from huggingface :
 ### Profiles
 
 The idea of profiles is to keep multiple configurations and be able to switch between them.
-Every profile can have many document stores. This allows you to separate them thematicaly f.e. one docs store for **economics** another for **history** ...etc
 
-For now you have to create manually the directory structure and configuration if you want to use other profile than 'main'.
+Every profile can have many document stores. 
+This allows you to separate them thematicaly f.e. one docs store for **economics** another for **history** ...etc
 
-Here is the directory structure for the 'main' profile:
+For now you have to create manually the directory structure and configuration if you want to use profile other than 'main'.
+
+Here is the directory structure for the 'main' profile (for new profiles follow the same structure) :
 
 	tree -d ./profiles -L 3
 	
@@ -58,16 +60,17 @@ Here is the directory structure for the 'main' profile:
 	        ├── main
 	        └── test
 
-.. and the config file should be in the profile base directory :
+.. and the config file should be in the profile **base** directory :
 
 	profiles/main/profile.toml
 
 The cfg is using **.toml** format.
 https://toml.io/en/
 
-#### Context
+### Context
 
-How many QA pairs to use as a context, so you can ask sequence of related questions. (Flag: -c)
+if you want to ask sequence of related questions then use  
+cmd line parameter **-c** to specify how many QA pairs to use as a context. 
 
 For example :
 
@@ -89,9 +92,9 @@ if -c 2, the shell will stealthy prepend the previous two QA pairs as a context.
 ### Running
 
 0. Create 'models' directory or symlink to the directory where you host your LLM's
-1. Download a model in the ./models directory. (make a subdir for the specific model)
+1. Download a model in the ./models directory. (it is a good idea to create a subdir for the specific model)
    
-	F.e. from here : https://huggingface.co/TheBloke/WizardLM-7B-GGML/tree/main
+	F.e. you can pick this model for a test : https://huggingface.co/TheBloke/WizardLM-7B-GGML/tree/main
 
 3. Configure the model in **profiles/main/profile.toml**
 
@@ -111,16 +114,18 @@ if -c 2, the shell will stealthy prepend the previous two QA pairs as a context.
 
 4. Then copy the source docs (.txt, .pdf ...) to the corresponding 'src'-sub-directory (look above dir structure)
 
-5. Next ingest them. This will create/update the relevant vector-db under 'dbs' dir
+5. Next ingest the copied documents. This will create/update the relevant vector-db under 'dbs' dir
 
 		python3 ingest_docs.py --profile main --db main
 
-6. Run the shell
+6. Finally run the shell
 
 		python3 run_aide.py --profile main --db main
 
 
 -----
+
+#### Tools 
 
 	$ python3 ingest_docs.py --help
 	usage: ingest_docs.py [-h] [--profile PROFILE] [--db DB]
@@ -190,11 +195,11 @@ Check the available commands with !help
 #### Example of a simple chat
 
 	$ python3 run_aide.py --profile main --db main
-	Loading profile : .//profiles/main/profile.toml
+	Loading profile : ./profiles/main/profile.toml
 	Profile: main
 	Model: main
 	DB: main
-	Using embedded DuckDB with persistence: data will be stored in: .//profiles/main/dbs/main
+	Using embedded DuckDB with persistence: data will be stored in: ./profiles/main/dbs/main
 	{'model_path': './models/TheBloke_WizardLM-7B-GGML/wizardLM-7B.ggmlv3.q4_1.bin', 'n_ctx': 1000, 'n_batch': 16, 'n_gpu_layers': 20, 'max_tokens': 512}
 	llama.cpp: loading model from ./models/TheBloke_WizardLM-7B-GGML/wizardLM-7B.ggmlv3.q4_1.bin
 	................	
@@ -214,12 +219,15 @@ Check the available commands with !help
 	preparedness.
 	aide: !source 1
 	./profiles/main/src/main/story-of-mankind.txt
+ 
 	aide: !mode direct
 	aide: who are the spartans ?
 	
 	The Spartans were a group of ancient Greeks who lived in the city-state of Sparta, located in the southern part of the country. They were known for their toughness and discipline, as well as their rigorous military training and lifestyle. The Spartans played a key role in defending Greece against invading Persian forces in the 5th century BCE, and they were also famous for their political system, which was based on a strict hierarchy of rulers and warriors. Today, the term "Spartan" is often used as a metaphor for strength, discipline, and toughness.
 	aide: !time
 	19.11
+
+-----
 
 #### Using multiple sources/dbs
 
@@ -275,6 +283,7 @@ Check the available commands with !help
 	
 	Law is a set of rules and regulations that are established by the government or other authoritative bodies to govern the behavior of individuals and organizations within a particular society. These laws are designed to promote order, justice, and fairness in society, and to protect citizens from harm. Law can be written or unwritten, and can cover a wide range of topics such as contract law, criminal law, tort law, property law, and environmental law
 
+-----
 
 #### Using System prompt
 
