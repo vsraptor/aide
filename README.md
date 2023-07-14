@@ -19,7 +19,7 @@ In short this tool allows you to interact with different document-sets OR simply
 	6. Keeps .history of the commands
 	7. Keeps .chat_history
  	8. Multiline support (use Alt+Enter to commit a question)
-  	9. Context - i.e. ow many QA pairs to use as a context.
+  	9. Context support - i.e. how many QA pairs to use as a context.
 
 
 
