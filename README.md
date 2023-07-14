@@ -19,6 +19,7 @@ In short this tool allows you to interact with different document-sets OR simply
 	6. Keeps .history of the commands
 	7. Keeps .chat_history
  	8. Multiline support (use Alt+Enter to commit a question)
+  	9. Context - i.e. ow many QA pairs to use as a context.
 
 
 
@@ -63,6 +64,10 @@ Here is the directory structure for the 'main' profile:
 
 The cfg is using **.toml** format.
 https://toml.io/en/
+
+#### Context
+
+How many QA pairs to use as a context, so you can ask sequence of related questions.
 
 ### Installation
 
