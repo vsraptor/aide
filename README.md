@@ -76,6 +76,9 @@ For example :
 - what about the athenians ?
 - ....
 - how the Thebians differ ?
+- ...
+
+if -c 2, the shell will stealthy prepend the previous two QA pairs as a context.
 
 ### Installation
 
