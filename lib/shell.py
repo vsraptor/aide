@@ -5,11 +5,12 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.formatted_text import HTML
 
+from collections import deque
 import argparse
 from aide import *
 from utils import *
 from prompts import *
-
+ 
 
 class History:
 
@@ -23,12 +24,17 @@ class History:
 	def close(self):
 		self.file.close()	
 
+class Buffer(deque):
+
+	def astr(self): 
+		return "\n".join(self)
 
 class Shell:
 
 	def __init__(self):
 		self.args = self.parse_arguments()
 
+		self.buffer = Buffer(maxlen=self.args.ctx_pairs * 2)
 		self.mode = 'direct'
 		self.res = None
 		self.prompts = Prompts()
@@ -41,11 +47,12 @@ class Shell:
 
 	def parse_arguments(self):
 		parser = argparse.ArgumentParser(description='AIDE: Ask questions to your documents without an internet connection, using the power of LLMs.')
-		parser.add_argument("--mute-stream", "-M", action='store_true', help='Use this flag to disable the streaming StdOut callback for LLMs.')
-		parser.add_argument("--multiline", "-l", default=False, type=bool, help='Use multiline mode. Alt-Enter commits the question. Default: false')
 		parser.add_argument("--profile", "-p", default='main', help='Select profile. Default: main')
 		parser.add_argument("--model", "-m", default='main', help='Select model.  Default: main')
 		parser.add_argument("--db", "-d", default='main', help='Select db.  Default: main')
+		parser.add_argument("--mute-stream", "-M", action='store_true', help='Use this flag to disable the streaming StdOut callback for LLMs.')
+		parser.add_argument("--multiline", "-l", default=False, type=bool, help='Use multiline mode. Alt-Enter commits the question. Default: false')
+		parser.add_argument("--ctx_pairs", "-c", default=0, type=int, help='How many QA pairs to use as a context. Default: 0')
 
 		args = parser.parse_args()
 		if 'help' in args :
@@ -155,7 +162,7 @@ quit - exit the session
 	def quit(self): pass
 	
 	def bottom_toolbar(self):
-		return HTML(f'profile: <b><style bg="ansired">{self.aide.profile_name}</style></b> | model: <b>{self.aide.model_name}</b> | db: <b>{self.aide.db_name}</b> | mode: <b>{self.mode}</b>| multi: <b>{self.args.multiline}</b>')
+		return HTML(f'''profile: <b><style bg="ansired">{self.aide.profile_name}</style></b> | model: <b>{self.aide.model_name}</b> | db: <b>{self.aide.db_name}</b> | mode: <b>{self.mode}</b> | ctx: <b>{self.args.ctx_pairs}</b> | multi: <b>{self.args.multiline}</b>''')
 
 
 	def step(self, text):
@@ -165,10 +172,18 @@ quit - exit the session
 			xmode = 'direct' if self.mode == 'qa' else 'qa'
 			question = text[1:]
 
-		self.res = self.aide.step(question, mode=xmode)
+		#if ctx_pairs > 0, prepend buffer
+		q = f'{self.buffer.astr()}\n{question}'
+		# say(f'>>{q}<<')
+		self.res = self.aide.step(q, mode=xmode)
 		print()
-		if self.args.mute_stream : print(self.res['result'])
-		self.chat_history.log(f"Q: {question}\nA: {self.res['result']}\n")
+
+		answer = self.res['result']
+		if self.args.mute_stream : print(answer)
+		self.chat_history.log(f"Q: {question}\nA: {answer}\n")
+
+		self.buffer.append(question)
+		self.buffer.append(answer)
 
 
 	def run(self):
