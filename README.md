@@ -67,7 +67,15 @@ https://toml.io/en/
 
 #### Context
 
-How many QA pairs to use as a context, so you can ask sequence of related questions.
+How many QA pairs to use as a context, so you can ask sequence of related questions. (Flag: -c)
+
+For example :
+
+- Who are the spartans ?
+- ...
+- what about the athenians ?
+- ....
+- how the Thebians differ ?
 
 ### Installation
 
@@ -123,23 +131,24 @@ How many QA pairs to use as a context, so you can ask sequence of related questi
 	  --db DB, -d DB        Select db.
 
 
-	
-	$ python3 run_aide.py --help
-	usage: run_aide.py [-h] [--mute-stream] [--multiline MULTILINE] [--profile PROFILE] [--model MODEL] [--db DB]
+		
+	$ python3 run_aide.py -h
+	usage: run_aide.py [-h] [--profile PROFILE] [--model MODEL] [--db DB] [--mute-stream] [--multiline MULTILINE] [--ctx_pairs CTX_PAIRS]
 	
 	AIDE: Ask questions to your documents without an internet connection, using the power of LLMs.
 	
 	options:
 	  -h, --help            show this help message and exit
-	  --mute-stream, -M     Use this flag to disable the streaming StdOut callback for LLMs.
-	  --multiline MULTILINE, -l MULTILINE
-	                        Use multiline mode. Alt-Enter commits the question. Default: false
 	  --profile PROFILE, -p PROFILE
 	                        Select profile. Default: main
 	  --model MODEL, -m MODEL
 	                        Select model. Default: main
 	  --db DB, -d DB        Select db. Default: main
-
+	  --mute-stream, -M     Use this flag to disable the streaming StdOut callback for LLMs.
+	  --multiline MULTILINE, -l MULTILINE
+	                        Use multiline mode. Alt-Enter commits the question. Default: false
+	  --ctx_pairs CTX_PAIRS, -c CTX_PAIRS
+	                        How many QA pairs to use as a context. Default: 0
 -----
 
 ### Interact
