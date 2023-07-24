@@ -38,6 +38,19 @@ Here are some I used from huggingface :
 	TheBloke_WizardLM-30B-Uncensored-GGML
 	TheBloke_WizardLM-7B-Landmark
 
+#### Using GPU
+
+if you use **GGML** model you can offload some of the layers to the GPU to speedup inference by using **n_gpu_layers** parameter in the config (for 8GB GPU experiment with values 20-40).
+
+To be able to use that parameter make sure you install llama-cpp this way :
+
+	1. Make sure you have the CUDA toolkit installed
+	 	apt install nvidia-cuda-toolkit
+	2. Install llama-cpp. (Use verbose mode to spot problems with installation) 
+ 		CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 VERBOSE=1 pip install llama-cpp-python -v
+   	3. May be install nvitop or nvtop if you want to watch the GPU status/usage
+
+ 
 ### Profiles
 
 The idea of profiles is to keep multiple configurations and be able to switch between them.
